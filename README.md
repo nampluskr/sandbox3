@@ -3,7 +3,7 @@
 - `[title]_[backend]_[dataset]_[task]_[model]`
 
 ```bash
-mnist-numpy-mlp/ # mnist-cupy-cnn
+mnist-numpy-mlp/ # mnist-cupy-cnn / mnist-pytorch-mlp/cnn
 ├── configs/
 ├── src/
 │   ├── common/

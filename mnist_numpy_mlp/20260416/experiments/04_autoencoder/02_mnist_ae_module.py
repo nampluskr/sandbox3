@@ -56,7 +56,7 @@ decoder = Sequential(
     Sigmoid(),
     Linear(128, 256),
     Sigmoid(),
-    Linear(256, 784)
+    Linear(256, 784),
 )
 autoencoder = Sequential(
     encoder,
@@ -67,7 +67,7 @@ optimizer = SGD(autoencoder, lr=LEARNING_RATE)
 #################################################################
 ## 4. Training
 #################################################################
-print(f"\n>> Autoencoder Training (2D Latent Space):")
+print(f"\n>> Training")
 
 for epoch in range(1, NUM_EPOCHS + 1):
     total_loss = 0
@@ -81,16 +81,14 @@ for epoch in range(1, NUM_EPOCHS + 1):
         total_size += batch_size
 
         # Forward
-        latent = encoder(x)
-        logits = decoder(latent)
+        logits = autoencoder(x)
         recon = sigmoid(logits)
         loss = mse(recon, x)
 
         # Backward
         dout = 2 * (recon - x) / batch_size
         dout = sigmoid_grad(dout) * dout
-        dout = decoder.backward(dout)
-        encoder.backward(dout)
+        autoencoder.backward(dout)
 
         # Update weights
         optimizer.step()
@@ -128,26 +126,15 @@ print(f"\n>> Latent Space & Reconstruction Samples:")
 
 x = x_test[:NUM_SAMPLES]  # (10, 784)
 
-# Encode
 latent = encoder(x)
 
 print("Latent vectors (2D):")
 for i in range(NUM_SAMPLES):
     print(f"Sample {i+1}: [{latent[i, 0]:.3f}, {latent[i, 1]:.3f}]")
 
-# # Decode
-# h4 = np.dot(latent, w4) + b4
-# a4 = sigmoid(h4)
-# h5 = np.dot(a4, w5) + b5
-# a5 = sigmoid(h5)
-# h6 = np.dot(a5, w6) + b6
-# recon = sigmoid(h6)  # (10, 784)
+logits = decoder(latent)
+recon = sigmoid(logits)
 
-# for i in range(NUM_SAMPLES):
-#     # reshape을 f-string 밖에서 수행
-#     original_img = x_sample[i].reshape(28, 28)
-#     recon_img = recon[i].reshape(28, 28)
-
-#     print(f"\nSample {i+1}")
-#     print(f"Original (row 14): {original_img[14, :] * 255:.1f}")
-#     print(f"Recon    (row 14): {recon_img[14, :] * 255:.1f}")
+for i in range(NUM_SAMPLES):
+    original_img = x[i].reshape(28, 28)
+    recon_img = recon[i].reshape(28, 28)

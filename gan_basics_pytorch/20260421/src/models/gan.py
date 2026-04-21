@@ -113,7 +113,6 @@ class VanillaGAN(nn.Module):
         noises = torch.randn(batch_size, self.latent_dim).to(self.device)
         fake_images = self.generator(noises).detach()
         fake_preds = self.discriminator(fake_images)
-
         d_loss, d_real_loss, d_fake_loss = self.d_loss_fn(real_preds, fake_preds)
 
         self.d_optimizer.zero_grad()

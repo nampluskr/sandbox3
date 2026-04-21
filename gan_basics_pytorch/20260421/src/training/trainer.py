@@ -27,5 +27,4 @@ def train(model, dataloader):
             info = {name: f"{value / total_size:.3f}" for name, value in metrics.items()}
             progress_bar.set_postfix(info)
 
-    results = {name: value / total_size for name, value in metrics.items()}
-    return results
+    return {name: value / total_size for name, value in metrics.items()}

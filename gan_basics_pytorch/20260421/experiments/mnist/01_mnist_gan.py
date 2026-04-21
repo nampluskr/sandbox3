@@ -12,7 +12,7 @@ from src.config import load_config, merge_configs
 from src.utils import set_seed, plot_images, create_noises, make_sample_path
 from src.datasets.mnist import load_mnist
 from src.models.gan import Generator, Discriminator, VanillaGAN
-from src.training.trainer import train
+from src.training.trainer import train, get_info
 
 
 def main():
@@ -60,7 +60,7 @@ def main():
     noises = create_noises(num_samples, latent_dim)
     for epoch in range(1, max_epochs + 1):
         train_results = train(gan, train_loader)
-        print(f"[{epoch:>2}/{max_epochs}] {train_results['info']}")
+        print(f"[{epoch:>2}/{max_epochs}] {get_info(train_results)}")
 
         if epoch % sample_interval == 0:
             # images, labels = gan.predict(noises, return_labels=True)
@@ -71,7 +71,6 @@ def main():
             images = gan.predict(noises)
             sample_path = make_sample_path(output_dir, __file__, epoch)
             plot_images(*images, save_path=sample_path, ncols=10)
-
 
 
 if __name__ == "__main__":

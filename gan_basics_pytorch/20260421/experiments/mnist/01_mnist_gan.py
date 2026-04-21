@@ -63,10 +63,15 @@ def main():
         print(f"[{epoch:>2}/{max_epochs}] {train_results['info']}")
 
         if epoch % sample_interval == 0:
-            images, labels = gan.predict(noises)
-            labels = [label >=0.5 for label in labels]
+            # images, labels = gan.predict(noises, return_labels=True)
+            # labels = [label >=0.5 for label in labels]
+            # sample_path = make_sample_path(output_dir, __file__, epoch)
+            # plot_images(*images, titles=labels, save_path=sample_path, ncols=10)
+
+            images = gan.predict(noises)
             sample_path = make_sample_path(output_dir, __file__, epoch)
-            plot_images(*images, titles=labels, save_path=sample_path, ncols=10)
+            plot_images(*images, save_path=sample_path, ncols=10)
+
 
 
 if __name__ == "__main__":

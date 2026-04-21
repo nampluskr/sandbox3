@@ -1,0 +1,10 @@
+# configs/gan.py
+
+model:
+  latent_dim: 100
+  base: 64
+
+train:
+  max_epochs: 20
+  num_samples: 100
+  sample_interval: 5

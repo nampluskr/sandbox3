@@ -77,17 +77,18 @@ class Discriminator(nn.Module):
 class VanillaGAN(nn.Module):
     def __init__(self, generator, discriminator, latent_dim=None, device=None):
         super().__init__()
+        self.latent_dim = latent_dim or generator.latent_dim
+
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.generator = generator.to(self.device)
         self.discriminator = discriminator.to(self.device)
 
-        self.generator.apply(init_weights)
-        self.discriminator.apply(init_weights)
-
         self.g_optimizer = optim.Adam(self.generator.parameters(), lr=2e-4, betas=(0.5, 0.999))
         self.d_optimizer = optim.Adam(self.discriminator.parameters(), lr=2e-4, betas=(0.5, 0.999))
 
-        self.latent_dim = latent_dim or self.generator.latent_dim
+        self.generator.apply(init_weights)
+        self.discriminator.apply(init_weights)
+
 
     def d_loss_fn(self, real_preds, fake_preds):
         real_labels = torch.ones_like(real_preds)

@@ -139,13 +139,16 @@ class VanillaGAN(nn.Module):
         }
 
     @torch.no_grad()
-    def predict(self, noises):
+    def predict(self, noises, return_labels=False):
         self.eval()
         noises = noises.to(self.device)
-        images = self.generator(noises)
-        preds = self.discriminator(images)
-
-        images = (images + 1) / 2.0
+        fake_images = self.generator(noises)
+        images = (fake_images + 1) / 2.0
         images = images.permute(0, 2, 3, 1).cpu().numpy()
+
+        if not return_labels:
+            return images.squeeze(-1)
+
+        preds = self.discriminator(fake_images)
         preds = torch.sigmoid(preds).cpu().numpy()
         return images.squeeze(-1), preds.squeeze(-1)

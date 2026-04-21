@@ -5,6 +5,10 @@ import sys
 from tqdm import tqdm
 
 
+def get_info(results):
+    return ", ".join([f"{name}:{value:.3f}" for name, value in results.items()])
+
+
 def train(model, dataloader):
     model.train()
     metrics = {}
@@ -24,5 +28,4 @@ def train(model, dataloader):
             progress_bar.set_postfix(info)
 
     results = {name: value / total_size for name, value in metrics.items()}
-    results["info"] = ", ".join([f"{name}:{value:.3f}" for name, value in results.items()])
     return results

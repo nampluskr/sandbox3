@@ -194,7 +194,7 @@ def parse_xml_poly(xml_path):
     return []
 
 
-def sort_clockwise(coords):
+def sort_clockwise2(coords):
     squeeze = coords.dim() == 1
     if squeeze:
         coords = coords.unsqueeze(0)
@@ -203,9 +203,9 @@ def sort_clockwise(coords):
     pts = coords.view(batch_size, 4, 2)
     cx = pts[:, :, 0].mean(dim=1, keepdim=True)
     cy = pts[:, :, 1].mean(dim=1, keepdim=True)
-    angles = torch.atan2(pts[:, :, 1] - cy, pts[:, :, 0] - cx)                                              # (B, 4)
+    angles = torch.atan2(pts[:, :, 1] - cy, pts[:, :, 0] - cx)              
     idx = angles.argsort(dim=1)
-    sorted_pts = torch.stack([pts[i][idx[i]] for i in range(batch_size)], dim=0)                                              # (B, 4, 2)
+    sorted_pts = torch.stack([pts[i][idx[i]] for i in range(batch_size)], dim=0)  
 
     result = []
     for batch_idx in range(batch_size):
@@ -216,6 +216,17 @@ def sort_clockwise(coords):
     return torch.stack(result).view(batch_size, 8).squeeze(0) if squeeze else \
            torch.stack(result).view(batch_size, 8)
 
+
+def sort_clockwise(coords):
+    pts = coords.view(4, 2)
+    center = pts.mean(dim=0, keepdim=True)
+    angles = torch.atan2(pts[:, 1] - center[0, 1], pts[:, 0] - center[0, 0])
+    idx = angles.argsort()
+    sorted_pts = pts[idx]
+    start_idx = (sorted_pts[:, 0] + sorted_pts[:, 1]).argmin().item()
+    ordered_pts = torch.roll(sorted_pts, -start_idx, dims=0)
+    return ordered_pts.view(-1)
+    
 
 class OxfordPetsRegressionPoly(Dataset):
     def __init__(self, data_dir, split="train", transform=None):

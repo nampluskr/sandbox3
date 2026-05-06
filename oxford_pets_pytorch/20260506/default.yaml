@@ -1,0 +1,35 @@
+# Paths
+backbone_dir: /home/namu/myspace/NAMU/backbones
+dataset_dir: /home/namu/myspace/NAMU/datasets
+root_dir: /home/namu/myspace/NAMU/clones/polygon_regression
+
+# Datasets
+oxford:
+  image_dir: ${dataset_dir}/oxford_pets/images
+  csv_path: ${root_dir}/anotations/anotations_oxford_filtered.csv
+  sampling: 1.0
+  weight: 3.0
+  train_image_dir: ${dataset_dir}/oxford_pets/images
+  train_csv_path: ${root_dir}/anotations/anotations_oxford_filtered.csv
+  test_image_dir: ${dataset_dir}/oxford_pets/images
+  test_csv_path: ${root_dir}/anotations/anotations_oxford_filtered.csv
+
+midv2020:
+  image_dir: ${dataset_dir}/midv2020_processed/images
+  csv_path: ${root_dir}/anotations/anotations_midv2020_filtered.csv
+  sampling: 0.1
+  weight: 2.0
+  train_image_dir: ${dataset_dir}/midv2020_processed/images
+  train_csv_path: ${root_dir}/anotations/anotations_midv2020_filtered.csv
+  test_image_dir: ${dataset_dir}/midv2020_processed/images
+  test_csv_path: ${root_dir}/anotations/anotations_midv2020_filtered.csv
+
+smartdoc:
+  image_dir: ${dataset_dir}/smart_doc_extracted_selected/images
+  csv_path: ${root_dir}/anotations/anotations_smartdoc_selected_filtered.csv
+  sampling: 0.5
+  weight: 1.0
+  train_image_dir: ${dataset_dir}/smart_doc_extracted_selected/images
+  train_csv_path: ${root_dir}/anotations/anotations_smartdoc_selected_filtered.csv
+  test_image_dir: ${dataset_dir}/smart_doc_extracted_selected/images
+  test_csv_path: ${root_dir}/anotations/anotations_smartdoc_selected_filtered.csv

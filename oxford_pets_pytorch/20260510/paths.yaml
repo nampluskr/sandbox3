@@ -1,0 +1,55 @@
+# configs/paths.yaml
+
+dataset_dir: /mnt/d/deep_learning/datasets
+backbone_dir: /mnt/deep_learning/backbones
+root_dir: /mnt/d/github/poly_regression
+output_dir: ${root_dir}/outputs
+trained_dir: ${output_dir}/trained
+tuned_dir: ${output_dir}/tuned
+
+datasets:
+  oxford_pets: ${dataset_dir}/oxford_pets
+  midv2020: ${dataset_dir}/midv2020_processed
+  smartdoc: ${dataset_dir}/smart_doc_extracted
+
+backbones:
+  resnet18: ${backbone_dir}/resnet18-f37072fd.pth
+  resnet34: ${backbone_dir}/resnet34-b627a593.pth
+  resnet50: ${backbone_dir}/resnet50-0676ba61.pth
+  efficientnet_b0: ${backbone_dir}/efficientnet_b0_rwightman-7f5810bc.pth
+  efficientnet_b5: ${backbone_dir}/efficientnet_b5_lukemelas-1a07897c.pth
+  vgg16: ${backbone_dir}/vgg16-397923af.pth
+  vgg19: ${backbone_dir}/vgg19-dcbb9e9d.pth
+  vgg16_bn: ${backbone_dir}/vgg16_bn-6c64b313.pth
+  vgg19_bn: ${backbone_dir}/vgg19_bn-c79401a0.pth
+  mobilenet_v2: ${backbone_dir}/mobilenet_v2-7ebf99e0.pth
+  mobilenet_v3_large: ${backbone_dir}/mobilenet_v3_large-8738ca79.pth
+  mobilenet_v3_small: ${backbone_dir}/mobilenet_v3_small-047dcff4.pth
+
+trained:
+  resnet18: ${trained_dir}/trained-resnet18.pth
+  resnet34: ${trained_dir}/trained-resnet34.pth
+  resnet50: ${trained_dir}/trained-resnet50.pth
+  efficientnet_b0: ${trained_dir}/trained-efficientnet_b0.pth
+  efficientnet_b5: ${trained_dir}/trained-efficientnet_b5.pth
+  vgg16: ${trained_dir}/trained-vgg16.pth
+  vgg19: ${trained_dir}/trained-vgg19.pth
+  vgg16_bn: ${trained_dir}/trained-vgg16_bn.pth
+  vgg19_bn: ${trained_dir}/trained-vgg19_bn.pth
+  mobilenet_v2: ${trained_dir}/trained-mobilenet_v2.pth
+  mobilenet_v3_large: ${trained_dir}/trained-mobilenet_v3_large.pth
+  mobilenet_v3_small: ${trained_dir}/trained-mobilenet_v3_small.pth
+
+tuned:
+  resnet18: ${tuned_dir}/tuned-resnet18.pth
+  resnet34: ${tuned_dir}/tuned-resnet34.pth
+  resnet50: ${tuned_dir}/tuned-resnet50.pth
+  efficientnet_b0: ${tuned_dir}/tuned-efficientnet_b0.pth
+  efficientnet_b5: ${tuned_dir}/tuned-efficientnet_b5.pth
+  vgg16: ${tuned_dir}/tuned-vgg16.pth
+  vgg19: ${tuned_dir}/tuned-vgg19.pth
+  vgg16_bn: ${tuned_dir}/tuned-vgg16_bn.pth
+  vgg19_bn: ${tuned_dir}/tuned-vgg19_bn.pth
+  mobilenet_v2: ${tuned_dir}/tuned-mobilenet_v2.pth
+  mobilenet_v3_large: ${tuned_dir}/tuned-mobilenet_v3_large.pth
+  mobilenet_v3_small: ${tuned_dir}/tuned-mobilenet_v3_small.pth
